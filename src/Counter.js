@@ -6,7 +6,9 @@ const getStateFromLocaleStrorage = () => {
 }
 const setStateToLocaleStorage = (state) => {
     localStorage.setItem('counterStorage', JSON.stringify(state))
-    console.log(state)
+    document.title = `Counter: ${state.count}`
+    console.log(state, document.title)
+
 }
 
 export default class Counter extends Component {
