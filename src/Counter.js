@@ -33,9 +33,10 @@ const Counter = ({ max, step }) => {
     countRef.current = count;
 
     useEffect(function () {
-        setTimeout(() =>{
+        const id = setInterval(() =>{
             console.log(`Counter  ${count}`)
         }, 3000)
+        return () => clearInterval(id) //the return value is called afterwards
     }, [count]);
 
     const increment = () => {
