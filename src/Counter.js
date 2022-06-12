@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react'
 
-
+const getCountFromLocaleStorage = ()=>{
+    const countStorage = localStorage.getItem('count')
+    return countStorage ? JSON.parse(countStorage) : {count :0}
+}
+const setCountToLocaleStorage = (count)=>{
+    localStorage.setItem("count", JSON.stringify({count}))
+}
 
 const Counter = ({ max, step }) => {
-    const [count, setCount] = useState(0);
+
+    const [count, setCount] = useState(getCountFromLocaleStorage().count);
 
     useEffect(function () {
         document.title = ` ${count}`
+        setCountToLocaleStorage(count)
     }, [count]);
 
     const increment = () => {
