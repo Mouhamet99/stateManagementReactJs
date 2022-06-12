@@ -19,6 +19,8 @@ export default class Counter extends Component {
 
     increment() {
         this.setState(increment)
+        this.setState(increment)
+        this.setState(increment)
     }
     decrement() {
         this.setState((state) => {
