@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react'
 
-const getCountFromLocaleStorage = ()=>{
+const getCountFromLocaleStorage = () => {
     const countStorage = localStorage.getItem('count')
-    return countStorage ? JSON.parse(countStorage).count : {count :0}
+    return countStorage ? JSON.parse(countStorage).count : { count: 0 }
 }
-const setCountToLocaleStorage = (count)=>{
-    localStorage.setItem("count", JSON.stringify({count}))
+const setCountToLocaleStorage = (count) => {
+    localStorage.setItem("count", JSON.stringify({ count }))
+}
+
+const useLocaleStorage = (initialState, key) => {
+    const get = () => {
+        const storage = localStorage.getItem(key)
+        return storage ? JSON.parse(storage).value : initialState
+    }
+
+    const [value, setValue] = useState(get())
+    
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify({ value }))
+    }, [value])
+
+    return [value, setValue]
 }
 
 const Counter = ({ max, step }) => {
 
-    const [count, setCount] = useState(getCountFromLocaleStorage());
+    const [count, setCount] = useLocaleStorage(0, 'count')
 
     useEffect(function () {
         document.title = ` ${count}`
-    }, [count]);
-   
-    useEffect(function () {
-        setCountToLocaleStorage(count)
     }, [count]);
 
     const increment = () => {
@@ -29,7 +40,7 @@ const Counter = ({ max, step }) => {
     };
     const decrement = () => { setCount(count - 1) };
     const reset = () => { setCount(0) };
-  
+
     return (
         <div className="Counter">
             <h1>Counter</h1>
