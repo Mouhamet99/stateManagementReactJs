@@ -7,7 +7,8 @@ const Counter = ({ max, step }) => {
 
     const increment = () => {
         setCount(count => {
-            if (count >= max) return
+            //unlike in setstate , return must return value
+            if (count >= max) return count
             return count + step
         })
     };
