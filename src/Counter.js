@@ -1,4 +1,4 @@
-import { useEffect, useState, useRe, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 // const getCountFromLocaleStorage = () => {
 //     const countStorage = localStorage.getItem('count')
