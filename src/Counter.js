@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
 const Counter = ({ max, step }) => {
     const [count, setCount] = useState(0);
+
+    useEffect(function () {
+        document.title = ` ${count}`
+    }, [count]);
 
     const increment = () => {
         setCount(count => {
@@ -14,7 +18,7 @@ const Counter = ({ max, step }) => {
     };
     const decrement = () => { setCount(count - 1) };
     const reset = () => { setCount(0) };
-
+  
     return (
         <div className="Counter">
             <h1>Counter</h1>
