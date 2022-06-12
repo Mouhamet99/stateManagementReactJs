@@ -1,4 +1,4 @@
-import  {Component} from 'react'
+import { Component } from 'react'
 
 export default class Counter extends Component {
     constructor(props) {
@@ -10,25 +10,24 @@ export default class Counter extends Component {
         this.decrement = this.decrement.bind(this);
         this.reset = this.reset.bind(this);
     }
-    increment (){
-        this.setState({
-            count: this.state.count + 1
+
+    increment() {
+        const { max, step } = this.props
+        this.setState(state => {
+            if (state.count > max) return;
+            return { count: state.count + step }
         })
-        this.setState({
-            count: this.state.count + 1
-        })
-        this.setState({
-            count: this.state.count + 1
-        })
-        alert(this.state.count) // 0 state run asynchronously 
+
 
     }
-    decrement (){
-        this.setState({
-            count: this.state.count - 1
+    decrement() {
+        this.setState((state) => {
+            return { count: this.state.count - 1 }
         })
+
     }
-    reset (){
+
+    reset() {
         this.setState({
             count: 0
         })
