@@ -1,11 +1,17 @@
 import { Component } from 'react'
 
+const getStateFromLocaleStrorage = () => {
+    const storage = localStorage.getItem('counterStorage')
+    return storage ? JSON.parse(storage) : { count: 0 } 
+}
+function setStateToLocaleStorage() {
+    localStorage.setItem('counterStorage', JSON.stringify(this.state))
+    console.log(this.state)
+}
 export default class Counter extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            count: 0
-        }
+        this.state = getStateFromLocaleStrorage()
         this.increment = this.increment.bind(this);
         this.decrement = this.decrement.bind(this);
         this.reset = this.reset.bind(this);
@@ -16,7 +22,7 @@ export default class Counter extends Component {
             const { max, step } = props
             if (state.count > max) return;
             return { count: state.count + step }
-        }, () => console.log(this.state.count))
+        },setStateToLocaleStorage.bind(this))
     }
     decrement() {
         this.setState((state) => {
