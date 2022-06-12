@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const getCountFromLocaleStorage = ()=>{
     const countStorage = localStorage.getItem('count')
-    return countStorage ? JSON.parse(countStorage) : {count :0}
+    return countStorage ? JSON.parse(countStorage).count : {count :0}
 }
 const setCountToLocaleStorage = (count)=>{
     localStorage.setItem("count", JSON.stringify({count}))
@@ -10,10 +10,13 @@ const setCountToLocaleStorage = (count)=>{
 
 const Counter = ({ max, step }) => {
 
-    const [count, setCount] = useState(getCountFromLocaleStorage().count);
+    const [count, setCount] = useState(getCountFromLocaleStorage());
 
     useEffect(function () {
         document.title = ` ${count}`
+    }, [count]);
+   
+    useEffect(function () {
         setCountToLocaleStorage(count)
     }, [count]);
 
